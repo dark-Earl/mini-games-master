@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>超级玛丽-Jackey</title>
+	<meta name="viewport" content="maximum-scale=1, user-scalable=no">
+
+	<link href="css/style.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="../../static/js/common/jquery-3.2.1.min.js"></script>
+<script src="js/base.js"></script>
+<script src="js/js.js"></script>
+<script>
+window.onload = function(){
+	Game.loading();
+}
+</script>
+	<script type="text/javascript" src="../../static/js/common/onlyWeixin.js"></script>
+	<link rel="stylesheet" href="../../static/css/keyboard.css">
+	<style type="text/css">
+		#keyArea {
+			left: 24%;
+			top:42%;
+		}
+		#jButton,#kButton{
+			width: 80px;
+			height: 50px;
+			margin: 10px;
+		}
+		.attackArea {
+			display: inline-block;
+			left: 52%;
+			margin-left: 188%;
+			width: 300px;
+			margin-top: 57%;
+		}
+		#begin{
+			margin-left:166%;
+		}
+	</style>
+	<link rel="stylesheet" href="../../static/css/main.css"/>
+</head>
+
+<body>
+<!--返回上一步-->
+<div>
+	<div class="ui-header">
+		<a href="javascript:history.back();" class="ui-back">
+			<div class="ui-trigger"></div>
+		</a>
+		<div class="ui-title">game</div>
+	</div>
+</div>
+<div id="main">
+	<div id="text">
+		<div class="name"></div>
+		<div class="boo">©1985 NINTENDO</div>
+		<p class="explanation">Left: A Right: D<br>Jump: K Fire: J<br>START GAME:H</p>
+	</div>
+	<div id="notice">
+		<div class="world">WORLD<span>0</span></div>
+		<div class="life"><span class="s1"></span><span class="s2">×</span><span class="s2">3</span></div>
+	</div>
+	<div id="over">GAME OVER</div>
+</div>
+<audio autoplay loop>
+	<source src="Sounds/Themes/mp3/Overworld.mp3">
+	<source src="Sounds/Themes/ogg/Overworld.ogg">
+</audio>
+
+<div style="width:290px;height:200px;" id="keyBoardArea">
+	<div class="commonButton">
+		<button id="begin" class="begin" data-key="72" data-keyname="H">H</button>
+	</div>
+	<div class="keyArea directedButton" id="keyArea" style="display: inline-block">
+		<button id="up" class="upButton" data-key="87" data-keyname="W">W</button>
+		<button id="right" class="rightButton" data-key="68" data-keyname="D">D</button>
+		<button id="left" class="downButton" data-key="65" data-keyname="A">A</button>
+		<button id="down" class="leftButton" data-key="83" data-keyname="S">S</button>
+	</div>
+
+	<div style="display: inline-block" class="attackArea commonButton">
+		<button id="jButton" class="jButton" data-key="74" data-keyname="J">J</button>
+		<button id="kButton" class="kButton" data-key="75" data-keyname="K">K</button>
+	</div>
+</div>
+
+<!--<script type="text/javascript" src="../../static/js/common/keyboard.js"></script>-->
+<script type="text/javascript">
+	$(function () {
+	    // 大屏样式
+		if(window.innerWidth>1000){
+            $("#keyBoardArea").hide();
+        }
+    })
+
+</script>
+<script type="text/javascript" src="js/keyBoard.js?v=1.2"></script>
+</body>
+</html>
