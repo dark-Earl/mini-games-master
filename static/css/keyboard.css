@@ -1,0 +1,31 @@
+
+/*按键区样式*/
+#keyArea{
+    position: absolute;
+    bottom:20%;
+    left:38%;
+    width:210px;
+    height:210px;
+    transform:rotate(45deg);
+}
+.leftDisplay{
+    left:3% !important;
+}
+#keyArea button{
+    width:80px;
+    height:80px;
+    margin:10px;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+
+}
+
+#keyBoardArea button{
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+
+}

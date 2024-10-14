@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1, user-scalable=no">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>乒乓球对打</title>
+	<style>
+		html{
+			height: 100%;
+		}
+		body{
+			height: 100%;
+			align-items: center;
+			justify-content: center;
+			background-color: #202020;
+			display: flex;
+			margin: 0;
+		}
+		canvas{
+			border: 1px solid #fff;
+			border-left: none;
+			border-right: none;
+			height: 100%;
+			image-rendering: pixelated;
+		}
+	</style>
+	<script type="text/javascript" src="../../static/js/common/onlyWeixin.js"></script>
+	<link rel="stylesheet" href="../../static/css/keyboard.css">
+	<link rel="stylesheet" href="../../static/css/main.css"/>
+</head>
+<body>
+<!--返回上一步-->
+<div>
+	<div class="ui-header">
+		<a href="javascript:history.back();" class="ui-back">
+			<div class="ui-trigger"></div>
+		</a>
+		<div class="ui-title">退出</div>
+	</div>
+</div>
+	<canvas id="pong" width="400" height="800"></canvas>
+	<script src="./pong.js"></script>
+</body>
+</html>

@@ -1,0 +1,207 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>贪吃蛇1</title>
+    <meta name="viewport" content="maximum-scale=1, user-scalable=no">
+
+    <script type="text/javascript" src="../../static/js/common/jquery-3.2.1.min.js"></script>
+    <style><!--
+    .food {
+        background-color: green
+    }
+
+    .snake {
+        background-color: red
+    }
+
+    -->
+    </style>
+    <script type="text/javascript" src="../../static/js/common/onlyWeixin.js"></script>
+    <link rel="stylesheet" href="../../static/css/keyboard.css">
+    <link rel="stylesheet" href="../../static/css/main.css"/>
+</head>
+<body>
+<!--返回上一步-->
+<header>
+    <header class="ui-header">
+        <a href="javascript:history.back();" class="ui-back">
+            <header class="ui-trigger"></header>
+        </a>
+        <header class="ui-title">game</header>
+    </header>
+</header>
+<div id="mainstay" class="mainstay">
+
+</div>
+
+<div>
+    <div class="keyArea" id="keyArea">
+        <button id="up" class="upButton" data-key="38" data-keyname="ArrowUp"></button>
+        <button id="right" class="rightButton" data-key="39" data-keyname="ArrowRight"></button>
+        <button id="left" class="downButton" data-key="37" data-keyname="ArrowLeft"></button>
+        <button id="down" class="leftButton" data-key="40" data-keyname="ArrowDown"></button>
+    </div>
+</div>
+
+
+<script>
+var num = 15;
+var rows = 20;
+var cols = 30;
+var boderwidth = 10;
+var foodnum = 0;
+var sx = parseInt(Math.random() * cols);
+var sy = parseInt(Math.random() * rows);
+
+function creatmap() {
+    var bw = num * cols + 2 * boderwidth;
+    var bh = num * rows + 2 * boderwidth;
+    $("#mainstay")[0].innerHTML = '<div id="mainmap" style="position:absolute;left:' + (document.body.clientWidth - bw) / 2 + 'px;top:20%;width:' + bw + 'px;height:' + bh + 'px;borderwidth:' + boderwidth + 'px;border-style:outset;border-color:#6C7208"><li style="margin-top:300px;width:' + bw + 'px;height:20px;background-color:#6C7208;font-size:15">欢乐贪吃蛇</li></div>';
+    map = new Array();
+    for (y = 0; y < rows; y++) {
+        map[y] = new Array();
+        for (x = 0; x < cols; x++) {
+            map[y][x] = '0';
+        }
+    }
+    createfood();
+    createsnake();
+}
+
+function createfood() {
+    fx = parseInt(Math.random() * cols);
+    fy = parseInt(Math.random() * rows);
+    if (map[fy][fx] == '0') {
+        $("#mainmap")[0].innerHTML += '<span style="position:absolute;left:' + fx * num + ';top:' + fy * num + ';width:' + num + ';height:' + num + ';overflow:hidden;" class="food"></span>';
+        map[fy][fx] = 'f';
+    } else {
+        createfood();
+    }
+}
+
+function createsnake() {
+    $("#mainmap")[0].innerHTML += '<div x=' + sx + ' y=' + sy + ' style="position:absolute;left:' + sx * num + ';top:' + sy * num + ';width:' + num + ';height:' + num + ';overflow:hidden;" class="snake"></div>';
+    map[sy][sx] = 's';
+}
+
+document.onkeydown = keydown;
+
+function keydown() {
+    key = event.key;
+//var key=37;
+    switch (key) {
+        case 'ArrowLeft'://��
+            dir(-1, 0);
+            break;
+        case 'ArrowUp'://��
+            dir(0, -1);
+            break;
+        case 'ArrowRight'://��
+            dir(1, 0);
+            break;
+        case 'ArrowDown'://��
+            dir(0, 1);
+            break;
+    }
+    return false;
+}
+
+var start = 0;
+
+function dir(x, y) {
+    gox = x;
+    goy = y;
+    //alert(gox);
+    //alert(sx);
+    if (start == 0) {
+        otimes();
+        start = 1;
+        move();
+    }
+}
+
+function move() {
+    sx += gox;
+    sy += goy;
+    if (sy == 20) {
+        sy -= 1;
+    }
+    if (sy < 0 || sy > rows || sx < 0 || sx > cols) {
+        move1();
+    } else {
+        var snakefront = map[sy][sx];
+        if (snakefront == '0') {
+            move2();
+        } else if (snakefront == 'f') {
+            move3();
+        } else {
+            if (sx == 30 || sy == 20) {
+                map[sy][sx] = '0';
+                move2();
+            } else {
+                move1();
+            }
+        }
+    }
+}
+
+function move1() {
+    restart = confirm("Game Over！");
+    if (restart) {
+        window.location.reload();
+    }
+}
+
+//��ǰ���Ŀյ�
+var times = 200;
+
+function move2() {
+    homey = sy - goy;
+    homex = sx - gox;
+    map[homey][homex] = '0';
+    if (foodnum == 0) {
+        for (t = 1; t < document.getElementsByTagName('div').length; t++) {
+            document.getElementsByTagName('div')[t].style.backgroundColor = "white";
+        }
+    } else {
+        ter = document.getElementsByTagName('div').length - foodnum-2;
+        for (t = 1; t < ter; t++) {
+            document.getElementsByTagName('div')[t].style.backgroundColor = "white";
+        }
+    }
+    createsnake();
+    setTimeout('move()', times);
+}
+
+function move3() {
+    createsnake();
+    foodnum += 1;
+    createfood();
+    dy = sy - goy;
+    dx = sx - gox;
+    map[dy][dx] = '0';
+    setTimeout('move()', times);
+}
+
+function otimes() {
+    times -= 5;
+    if (times > 5) {
+        setTimeout('otimes()', 5000)
+    }
+}
+
+onload = creatmap;
+</script>
+<script type="text/javascript">
+    $(function () {
+        // 大屏样式调整
+        if(window.innerWidth>1000){
+            $("#keyArea").addClass("leftDisplay");
+        }
+    })
+
+
+</script>
+<script type="text/javascript" src="../../static/js/common/keyboard.js"></script>
+</body>
+</html>

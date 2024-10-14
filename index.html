@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>游戏集锦</title>
+    <style type="text/css">
+        html {
+            overflow: hidden;
+            -ms-touch-action: none;
+            -ms-content-zooming: none;
+        }
+        body {
+            position: absolute;
+            margin: 0;
+            padding: 0;
+            background: #fff;
+            width: 100%;
+            height: 100%;
+        }
+        #screen {
+            position: absolute;
+            left:0;
+            top:0;
+            width: 100%;
+            height: 100%;
+            background:#000;
+            perspective:500px;
+            -webkit-perspective:500px;
+        }
+
+        .cube {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            margin: 0;
+            user-select: none;
+            transform-style: preserve-3d;
+            -webkit-transform-style: preserve-3d;
+        }
+
+        .face {
+            position: absolute;
+            margin-left:-300px;
+            margin-top:-200px;
+            width:600px;
+            height:400px;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            transform-origin:50% 50%;
+            -webkit-transform-origin:50% 50%;
+            transition: outline 0.5s ease-in-out 0s;
+            cursor: pointer;
+        }
+
+        .button {
+            position: absolute;
+            margin-left:-150px;
+            margin-top:-100px;
+            width:300px;
+            height:200px;
+        }
+        .face:hover {
+            outline: rgba(255,255,255,1) solid 10px !important;
+        }
+    </style>
+    <script type="text/javascript" src="static/js/common/onlyWeixin.js"></script>    
+    <script type="text/javascript" src="static/js/common/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+<div id="screen">
+    <div id="cube" class="cube" style="transform: translateZ(0px) rotateX(0deg) rotateY(30deg);">
+        <img id="1" src="static/img/index/iceBird.jpg" class="face" data-transform="translateZ(-400px)" style="outline: none !important; transform: translateZ(-400px);" title="心想事成" alt="">
+        <img id="2" src="static/img/index/superMary.png" class="face" data-transform="rotateY(90deg) translateZ(-400px)" style="transform: rotateY(90deg) translateZ(-400px);" data-url="games/superMary-Jacky/index.html" title="超级玛丽-Jacky" alt="2">
+        <img id="3" src="static/img/index/cycleRace.png" class="face" data-transform="rotateY(-90deg) translateZ(-400px)" style="transform: rotateY(-90deg) translateZ(-400px);" data-url="games/cycleRace/index.html"  title="旋风赛车" alt="3">
+        <img id="4" src="static/img/index/iceBird.jpg" class="face" data-transform="rotateY(180deg) translateZ(-400px)" style="transform: rotateY(180deg) translateZ(-400px);" title="万事如意" alt="" data-url="">
+        <img id="5" src="static/img/index/2048.png" class="face" data-transform="rotateX(90deg) translateZ(-300px)" style="transform: rotateX(90deg) translateZ(-300px);" data-url="games/2048/index.html" title="2048" alt="5">
+        <img id="6" src="static/img/index/planWar.png" class="face" data-transform="rotateX(-90deg) translateZ(-300px)" style="transform: rotateX(-90deg) translateZ(-300px);" data-url="games/planWar/index.html" title="飞机大战" alt="6">
+
+        <img id="7" src="static/img/index/superMary.png" class="face" data-transform="rotateY(180deg) translateZ(305px)" style="visibility: visible; transform: rotateY(180deg) translateZ(305px);" title="心想事成" alt="7" data-url="">
+
+        <img id="8" src="static/img/index/jumping.png" class="face button" data-transform="translateY(-80px) translateZ(-340px) scale(0.5)" style="transform: translateY(-80px) translateZ(-340px) scale(0.5);" data-url="games/jumping/index.html" title="跳一跳" alt="8">
+        <img id="9" src="static/img/index/snake1.png" class="face button" data-transform="translateX(-200px) translateY(-80px) translateZ(-340px) scale(0.5)" style="transform: translateX(-200px) translateY(-80px) translateZ(-340px) scale(0.5);" data-url="games/snake1/index.html" title="贪吃蛇1" alt="9">
+        <img id="10" src="static/img/index/tetris.png" class="face button"  data-transform="translateX(200px) translateY(-80px) translateZ(-340px) scale(0.5)" style="transform: translateX(200px) translateY(-80px) translateZ(-340px) scale(0.5);" data-url="games/tetris/index.html"  title="俄罗斯方块" alt="10">
+        <img id="11"   src="static/img/index/pingpong.png" class="face button"  data-transform="translateY(80px) translateZ(-340px) scale(0.5)" style="transform: translateY(80px) translateZ(-340px) scale(0.5);" data-url="games/pingpong/index.html" title="乒乓球对战" alt="11">
+        <img id="12" src="static/img/index/snake2.png" class="face button"  data-transform="translateX(-200px) translateY(80px) translateZ(-340px) scale(0.5)" style="transform: translateX(-200px) translateY(80px) translateZ(-340px) scale(0.5);" data-url="games/snake2/index.html" title="贪吃蛇2" alt="12">
+        <img id="13" src="static/img/index/superMary.png" class="face button" data-transform="translateX(200px) translateY(80px) translateZ(-340px) scale(0.5)" style="transform: translateX(200px) translateY(80px) translateZ(-340px) scale(0.5);" data-url="games/superMary-Jacky/index.html" title="超级玛丽-Jacky" alt="13">
+    </div>
+</div>
+<script type="text/javascript" src="static/js/index/main.js?v=1.2"></script>
+    <script type="text/javascript">
+        function newPage(url) {
+           
+                window.location.href=url;
+            
+        }
+        $(function () {
+            $("#cube").find("img").each(function (i,n) {
+                $(n).on("click touchend",function () {
+                    var url = $(n).attr("data-url");
+                    if(!!url){
+                        setTimeout(function () {
+                            newPage(url);
+                        },2000)
+                    }
+                })
+            })
+        })
+    </script>
+
+	
+</body>
+</html>
